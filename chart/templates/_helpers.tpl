@@ -46,7 +46,9 @@ Target language for Lingua detector
 */}}
 {{- define "assistant.targetLanguage" -}}
 {{- $v := include "assistant.variant" . -}}
-{{- if or (eq $v "lemonade") (eq $v "coffee") -}}
+{{- if eq $v "lemonade" -}}
+GERMAN
+{{- else if eq $v "coffee" -}}
 ENGLISH
 {{- else if or (eq $v "cachaca") (eq $v "cafept") -}}
 PORTUGUESE

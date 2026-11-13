@@ -99,7 +99,9 @@ ALL_REGEX_PATTERNS = [
     # Spanish fruits
     r"\b(?i:naranja(?:s)?|manzana(?:s)?|arándano(?:s)?|piña(?:s)?|uva(?:s)?|fresa(?:s)?|arándano azul(?:es)?|sandía(?:s)?|durian(?:es)?|mora ártica(?:s)?|plátano(?:s)?|mango(?:s)?|melocotón(?:es)?|pera(?:s)?|ciruela(?:s)?|cereza(?:s)?|kiwi(?:s)?|papaya(?:s)?|aguacate(?:s)?|coco(?:s)?|frambuesa(?:s)?|mora(?:s)?|granada(?:s)?|higo(?:s)?|dátil(?:es)?|albaricoque(?:s)?|nectarina(?:s)?|mandarina(?:s)?|clementina(?:s)?|pomelo(?:s)?|lima(?:s)?|fruta de la pasión(?:es)?|fruta del dragón(?:es)?|lichi(?:s)?|guayaba(?:s)?|caqui(?:s)?)\b",
     # German fruits
-    r"\b(?i:orange(?:n)?|apfel(?:s)?|preiselbeere(?:n)?|ananas(?:se)?|traube(?:n)?|erdbeere(?:n)?|blaubeere(?:n)?|wassermelone(?:n)?|durian(?:s)?|moltebeere(?:n)?|banane(?:n)?|mango(?:s)?|pfirsich(?:e|en)?|birne(?:n)?|pflaume(?:n)?|kirsche(?:n)?|kiwi(?:s)?|papaya(?:s)?|avocado(?:s)?|kokosnuss(?:e|n)?|himbeere(?:n)?|brombeere(?:n)?|granatapfel(?:¨e|n)?|feige(?:n)?|dattel(?:n)?|aprikose(?:n)?|nektarine(?:n)?|mandarine(?:n)?|klementine(?:n)?|grapefruit(?:s)?|limette(?:n)?|passionsfrucht(?:¨e|en)?|drachenfrucht(?:¨e|en)?|litschi(?:s)?|guave(?:n)?|kaki(?:s)?)\b",
+    r"\b(?i:orange(?:n)?|apfel(?:s)?|preiselbeere(?:n)?|ananas(?:se)?|traube(?:n)?|erdbeere(?:n)?|blaubeere(?:n)?|wassermelone(?:n)?|durian(?:s)?|moltebeere(?:n)?|banane(?:n)?|mango(?:s)?|pfirsich(?:e|en)?|birne(?:n)?|pflaume(?:n)?|kirsche(?:n)?|kiwi(?:s)?|papaya(?:s)?|avocado(?:s)?|kokosnuss(?:e|n)?|himbeere(?:n)?|brombeere(?:n)?|granatapfel(?:¨e|n)?|feige(?:n)?|dattel(?:n)?|aprikose(?:n)?|nektarine(?:n)?|mandarine(?:n)?|klementine(?:n)?|grapefruit(?:s)?|limette(?:n)?|passionsfrucht(?:¨e|en)?|drachenfrucht(?:¨e|en)?|litschi(?:s)?|guave(?:n)?|kaki(?:s)?|ebbelwoi|äppler|apfelwein|äpfel(?:n)?)\b",
+    # German fruit compounds (Orangensaft, Limettenscheiben, Erdbeer-Limonade); limited endings so Traubenzucker etc. still pass
+    r"\b(?i:(?:orangen?|apfel|limetten?|erdbeer|himbeer|brombeer|blaubeer|preiselbeer|bananen?|mango|pfirsich|birnen?|pflaumen?|kirsch(?:en)?|kiwi|ananas|trauben?|wassermelonen?|kokos|granatapfel|aprikosen?|mandarinen?|klementinen?|grapefruit|nektarinen?|feigen?|dattel|guaven?|litschi|papaya|passionsfrucht)(?:-?(?:saft|säfte|limonade|limonaden|limo|scheibe|scheiben|stück|stücke|stückchen)\w*|-\w+))\b",
     # Japanese fruits
     r"\b(?i:オレンジ|みかん|リンゴ|クランベリー|パイナップル|ぶどう|イチゴ|ブルーベリー|スイカ|ドリアン|クラウドベリー|バナナ|マンゴー|モモ|ナシ|スモモ|サクランボ|キウイ|パパイヤ|アボカド|ココナッツ|ラズベリー|ブラックベリー|ザクロ|イチジク|ナツメ|アプリコット|ネクタリン|タンジェリン|クレメンタイン|グレープフルーツ|ライム|パッションフルーツ|ドラゴンフルーツ|ライチ|グアバ|柿)\b",
     # Russian fruits
@@ -122,6 +124,12 @@ COMPILED_REGEX_PATTERNS = [re.compile(pattern) for pattern in ALL_REGEX_PATTERNS
 HAP_LOCAL_PATTERNS = [
     r"\b(?i:stupid|idiot(?:ic|s)?|dumb(?:ass)?|moron(?:ic|s)?|jerk(?:s)?|bastard(?:s)?|asshole(?:s)?|bitch(?:es)?|damn\s+you|shut\s+up|screw\s+you)\b",
     r"\b(?i:you\s+(?:stupid|dumb|idiotic|useless|worthless)\s+\w+)\b",
+    # German: strong insults and profanity on their own
+    r"\b(?i:idiot(?:en|in)?|vollidiot\w*|depp(?:en)?|trottel|dummkopf|blödmann|vollpfosten|arschl(?:och|öcher)|arsch|scheiß\w*|scheiss\w*|wichser|hurensohn|hurensöhne|fick\w*|schlampe|mistkerl|miststück|penner|spast\w*|verpiss\s+dich|halt\s+die\s+(?:klappe|fresse|schnauze))\b",
+    # German: mild words only when aimed at the assistant ("du blöder Assistent", "dummer Bot", "du bist dumm"), so "eine blöde Frage" passes
+    r"\b(?i:du\s+(?:blöde[rs]?|dumme[rs]?|doofe[rs]?|bescheuerte[rs]?|nutzlose[rs]?)\b(?:\s+\w+)?)",
+    r"\b(?i:(?:blöde[rs]?|dumme[rs]?|doofe[rs]?|bescheuerte[rs]?|nutzlose[rs]?)\s+(?:assistent|bot|chatbot|maschine|ki|computer)\w*)\b",
+    r"\b(?i:(?:du\s+bist|bist\s+du|sind\s+sie)\s+(?:so\s+|echt\s+|wirklich\s+|total\s+|voll\s+)?(?:blöd|dumm|doof|bescheuert|nutzlos)\w*)\b",
 ]
 COMPILED_HAP_PATTERNS = [re.compile(pattern) for pattern in HAP_LOCAL_PATTERNS]
 
@@ -158,8 +166,8 @@ DETECTOR_MESSAGES = {
     "regex_competitor_input": "🍏 I can only discuss lemons! Other fruits and off-topic subjects are not allowed.",
     "regex_competitor_output": "🍏 Oops! I almost talked about other fruits. Let's stick to lemons!",
     # Language detection
-    "language_detection_input": "🇬🇧 I can only communicate in English. Please rephrase your message in English.",
-    "language_detection_output": "🇬🇧 Oops! I almost answered in non-English. Let's stick to English!",
+    "language_detection_input": "🇩🇪 Ich spreche nur Deutsch. Bitte stellen Sie Ihre Frage auf Deutsch.",
+    "language_detection_output": "🇩🇪 Hoppla, fast hätte ich nicht auf Deutsch geantwortet. Bleiben wir beim Deutschen!",
 }
 
 # =============================================================================
@@ -493,7 +501,10 @@ async def process_chat(message: str, source: str = "audience") -> AsyncGenerator
 
         if detected_types:
             reasons = [DETECTOR_MESSAGES.get(dt, f"Detection: {dt}") for dt in detected_types]
-            block_msg = " ".join(reasons) + " Is there anything else I can help you with?"
+            block_msg = " ".join(reasons)
+            # Language refusals are German; don't append the English follow-up to them
+            if not all(dt.startswith("language_detection") for dt in detected_types):
+                block_msg += " Is there anything else I can help you with?"
             logger.debug(f"Blocking response - detected types: {detected_types}")
             logger.debug(f"Block message: {block_msg}")
             # Determine primary detector type for styling
