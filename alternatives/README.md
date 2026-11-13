@@ -24,7 +24,7 @@ alternatives/
 From the repo root:
 
 ```bash
-./scripts/deploy.sh lemonade   # EN / lemons (default original)
+./scripts/deploy.sh lemonade   # DE / lemons (German on the german branch; EN on main)
 ./scripts/deploy.sh coffee     # EN / coffee
 ./scripts/deploy.sh cafe       # ES / café
 ./scripts/deploy.sh mate       # ES / mate
