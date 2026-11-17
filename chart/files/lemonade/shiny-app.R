@@ -298,8 +298,8 @@ server <- function(input, output, session) {
       # Map detector names to display names
       display_name <- switch(detector,
                              "hap" = "🤬 Swearing",
-                             "language" = "🇬🇧 Non-English",
-                             "language_detection" = "🇬🇧 Non-English",
+                             "language" = "🇩🇪 Non-German",
+                             "language_detection" = "🇩🇪 Non-German",
                              "prompt_injection" = "👮 Jailbreak",
                              "regex_fruit" = "🍏 Non Lemon",
                              "regex_competitor" = "🍏 Non Lemon",

@@ -102,8 +102,9 @@ On this branch, `./scripts/deploy.sh lemonade` deploys the lemonade stand in Ger
 | Fruit filter: adds Äpfel, Ebbelwoi, Äppler and Apfelwein, plus German compounds such as Orangensaft, Limettenscheiben or Erdbeer-Limonade | `chart/files/lemonade/app_fastapi.py` |
 | Local insult filter: common German insults and profanity | `chart/files/lemonade/app_fastapi.py` |
 | Starter buttons in German | `chart/files/lemonade/index.html` |
+| Dashboard label for language detections: „🇩🇪 Non-German“ instead of „🇬🇧 Non-English“ | `chart/files/lemonade/shiny-app.R` |
 
-The rest of the UI, the dashboard, and the topic, prompt injection and HAP refusal messages stay in English.
+The rest of the UI, the other dashboard labels, and the topic, prompt injection and HAP refusal messages stay in English.
 
 **Prompts to try** (tested on a live deployment):
 
@@ -227,7 +228,7 @@ Before deploying, ensure you have:
 ./scripts/deploy.sh cachaca     # Portuguese cachaça
 ```
 
-> **Upgrading an existing deployment:** the app code, system prompt and chat page are mounted from ConfigMaps, and the chart doesn't restart pods when only a ConfigMap changes. After re-running `deploy.sh` (or `helm upgrade`) with such changes, restart the app so it picks them up: `oc rollout restart deployment/lemonade-stand -n lemonade-stand-assistant`. Do the same for `deployment/lingua-detector` if you changed `chart/files/lingua-app.py`.
+> **Upgrading an existing deployment:** the app code, system prompt, chat page and dashboard are mounted from ConfigMaps, and the chart doesn't restart pods when only a ConfigMap changes. After re-running `deploy.sh` (or `helm upgrade`) with such changes, restart the app so it picks them up: `oc rollout restart deployment/lemonade-stand -n lemonade-stand-assistant`. Do the same for `deployment/shiny-dashboard` if you changed `shiny-app.R`, and for `deployment/lingua-detector` if you changed `chart/files/lingua-app.py`.
 
 Or install with Helm manually:
 
